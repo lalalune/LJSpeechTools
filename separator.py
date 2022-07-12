@@ -7,7 +7,7 @@ import glob
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--source', type=str, required=True, help='source audio file')
-parser.add_argument('--threshold', type=str, required=True, help='threhsold')
+parser.add_argument('--threshold', type=str, required=True, help='threshold')
 
 # get the args
 args = parser.parse_args()
@@ -19,7 +19,7 @@ wav = preprocess_wav(spath)
 
 
 # get a list of audio files from the juice/wavs directory
-wav_files = glob.glob('./source/*.wav')
+wav_files = glob.glob('./wavs/*.wav')
 
 # make a directory at juice/not_speaker
 not_speaker_dir = Path('./not_speaker')
@@ -42,4 +42,3 @@ for fpath in wav_files:
         print("Audio is not speaker: " + fpath)
         # move the audio to the juice/not_speaker directory
         Path(fpath).rename('not_speaker/' + Path(fpath).name)
-
