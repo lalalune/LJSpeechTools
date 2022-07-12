@@ -1,3 +1,0 @@
-# install conda
-
-# activate
