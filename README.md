@@ -1,5 +1,5 @@
-# Simple Speaker Isolation and Transcription
-A super simple, python based solution for separating a folder of audio files by speaker
+# LJSpeech Tools
+Tools for creating LJSpeech datasets from WAV files
 
 To install:
 
