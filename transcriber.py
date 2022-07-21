@@ -1,7 +1,7 @@
 import glob
 
 import speech_recognition as sr
-from os import path
+from os import path, rename
 
 r = sr.Recognizer()
 
@@ -13,11 +13,19 @@ metadata = []
 # for each wav file
 for fpath in wav_files:
     with sr.AudioFile(fpath) as source:
+        print()
         audio = r.record(source)  # read the entire audio file
-        transcription = r.recognize_google(audio)
-        print("Transcription: " + transcription)
-        # write the transcription to a file
-        metadata.append(fpath + "|" + transcription)
+        transcription = ''
+        try:
+            transcription = r.recognize_google(audio)
+            print(fpath + "|" + transcription)
+            metadata.append(fpath + "|" + transcription)
+        except:
+            print('Skipping ' + fpath)
+            new_fpath = './ignore/' + path.basename(fpath)
+            # now move the file to the skipped directory
+            rename(fpath, new_fpath)
+            continue
 
 metadata_txt = '\n'.join(metadata)
 
