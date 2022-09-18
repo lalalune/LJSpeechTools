@@ -22,6 +22,7 @@ for fpath in wav_files:
             metadata.append(fpath + "|" + transcription)
         except:
             print('Skipping ' + fpath)
+            metadata.append(fpath + "|" + "<ERROR>")
             new_fpath = './ignore/' + path.basename(fpath)
             # now move the file to the skipped directory
             rename(fpath, new_fpath)
