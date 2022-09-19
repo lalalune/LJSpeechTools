@@ -91,4 +91,6 @@ The training colab notebook is here: https://colab.research.google.com/github/ju
 
 Upload these files to your Google Drive along with the zip, adjust the paths as necessary in the Colab and you're done!
 
-The files are very simple and lean heavily on existing libraries. Feel free to open the source and modify as you need, it's not that scary!
+### Good Luck!
+
+And thanks to all the hard working Ponies who took the time to document this. The compendium of knowledge created by the Pony Preservation Project was instrumental in giving these tools shape and form.
