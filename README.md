@@ -1,5 +1,8 @@
-# LJSpeech Tools
-Tools for creating LJSpeech datasets from WAV files
+# Webaverse Speech Tools
+Tools for creating and training datasets to be used with Webaverse.
+
+# Installation
+You will need Python 3 installed on your system.
 
 To install:
 
@@ -8,7 +11,30 @@ sudo apt install ffmpeg
 pip install resemblyzer SpeechRecognition
 ```
 
+# Pipeline (Easy Mode)
+1. Put your files in the `put_audio_files_here` folder
+
+2. Run the python script:
+```sh
+python pipeline.py
+```
+
+The dataset.zip folder will be what you need to train a voice with.
+
+# Training
+
+A colab Notebook has been provided [here](https://colab.research.google.com/drive/1F1BMC18XIJNFvkncdZHZvxd5oEAVsHxY)
+
+Upload your dataset to your Google drive, then press "run all cells" to run the notebook.
+
+You will need a Google account, but Colab is free. However, upgrading to Colab Pro will make training a lot easier, as you have guaranteed access to faster hardware.
+
+# Individual Tools
+`pipeline.py` is made from a collection of other scripts, which you can run individually. Speaker Separation is not included in the pipeline-- it is assumed that you have cleaned, separated tracks, but you can run it in a preprocess if you need it.
+
 ## Speaker Separation
+In our tests, separation usually only worked in the case where two or three speakers with distinctly different voices were speaking.
+
 To remove any wav files which contain audio which isn't the source speaker
 
 First, place some example audio from your speaker in the 'target' folder.
