@@ -1,6 +1,3 @@
-# read metadata.csv
-# replacing any instance of the following censored words with the uncensored version
-
 import csv
 
 # key value of censored words and their replacements
@@ -33,4 +30,5 @@ def replace_censored_words():
         writer = csv.writer(f)
         writer.writerows(metadata)
 
-replace_censored_words()
+if __name__ == "__main__":
+    replace_censored_words()

@@ -1,2 +1,5 @@
 metadata.csv
 *.wav
+trainfiles.txt
+valfiles.txt
+__pycache__

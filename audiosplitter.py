@@ -1,21 +1,6 @@
 import os
-import errno
-import warnings
-import subprocess
-from datetime import datetime
-from tqdm import tqdm
-import pandas as pd
-import librosa
-from audio import preprocess_wav
-
 from pydub import AudioSegment
-from pydub.silence import split_on_silence, detect_silence
-
-from text_cleaner import Cleaner
-import re
-from resemblyzer import VoiceEncoder, preprocess_wav
-from pathlib import Path
-import numpy as np
+from pydub.silence import split_on_silence
 import glob
 
 # using librosa, write a script that iterates thorugh all the waves in the /data directory and split them into chunks if there is a gap of silence longer than 1 second
@@ -41,11 +26,11 @@ def split_all_audios():
 
 # iterate through files in wavs, for each file get the length. if it's more than 12 seconds, split it into 12 second chunks at the first silence over 200ms
 def split_long_audios():
-    # if wavs_split and wavs_final don't exist, create them
-    if not os.path.exists('./wavs_split'):
-        os.makedirs('./wavs_split')
-    if not os.path.exists('./wavs_final'):
-        os.makedirs('./wavs_final')
+    # if wavs_split_temp and wavs_split_final don't exist, create them
+    if not os.path.exists('./wavs_split_temp'):
+        os.makedirs('./wavs_split_temp')
+    if not os.path.exists('./wavs_split_final'):
+        os.makedirs('./wavs_split_final')
     for wav in glob.glob('./wavs/*.wav'):
         # get the filename without the extension
         filename = os.path.splitext(os.path.basename(wav))[0]
@@ -67,7 +52,7 @@ def split_long_audios():
                 print(filename)
                 if current_length > 12 or (i == len(chunks) - 1 and len(chunks) > 1):
                     # export the chunk
-                    out_file = './wavs_split/' + filename + '_split' + str(current_split) + '.wav'
+                    out_file = './wavs_split_temp/' + filename + '_split' + str(current_split) + '.wav'
                     print("exporting", out_file)
                     out_data.export(out_file, format="wav")
                     # reset the current length and split
@@ -82,17 +67,14 @@ def split_long_audios():
                         out_data = chunk
                 
         else:
-            # copy to wavs_final
-            out_file = './wavs_final/' + filename + '.wav'
+            # copy to wavs_split_final
+            out_file = './wavs_split_final/' + filename + '.wav'
             # export the chunk
             audio.export(out_file, format="wav")
 
-
-split_long_audios();
-
 # remove any audio files that are less than 500 MS long or are silent
 def filter_short_audios():
-    for wav in glob.glob('./wavs_split/*.wav'):
+    for wav in glob.glob('./wavs_split_temp/*.wav'):
         # get the filename without the extension
         filename = os.path.splitext(os.path.basename(wav))[0]
         # get the length of the audio
@@ -101,13 +83,15 @@ def filter_short_audios():
         # if the length is more than 12 seconds, split it into 12 second chunks
         print("length is", length)
         if length > 1:
-            # copy to wavs_final
-            out_file = './wavs_final/' + filename + '.wav'
+            # copy to wavs_split_final
+            out_file = './wavs_split_final/' + filename + '.wav'
             # export the chunk
             audio.export(out_file, format="wav")
         else:
             print('omitting', wav)
 
-filter_short_audios();
-
-print('Final audio files are in ./wavs_final')
+if __name__ == "__main__":
+    split_all_audios();
+    split_long_audios();
+    filter_short_audios();
+    print('Final audio files are in ./wavs_split_final')
