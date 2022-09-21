@@ -3,7 +3,6 @@
 import csv
 import random
 import os
-import sys
 
 def make_dataset():
     # read in the metadata.csv file

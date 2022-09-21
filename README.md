@@ -8,7 +8,7 @@ To install:
 
 ```bash
 sudo apt install ffmpeg
-pip install resemblyzer SpeechRecognition
+pip install -r requirements.txt
 ```
 
 # Pipeline (Easy Mode)
