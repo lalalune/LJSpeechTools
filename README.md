@@ -4,7 +4,7 @@ Tools for creating voices for Webaverse.
 ## What do I need to make a dataset?
 30-60 minutes of clean audio (no sounds, noises or other speakers). Can be one file or many. The rest will be done for you.
 
-Mono 22khz WAV is ideal but the system will do it's best to convert other formats.
+Mono 22khz WAV is ideal but the system will try to convert other formats.
 
 # Installation
 You will need Python 3 installed on your system.
