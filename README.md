@@ -111,17 +111,6 @@ python transcriber.py
 ```
 This will create a metadata.csv, which is the standard format of LJSpeech -- for most training needs, the metadata.csv and wavs folder is all you need as input.
 
-4. For training the SortAnon colab notebooks
-```bash
-python make_dataset.py
-```
-
-This will create a zip file called dataset.zip and two text files -- train_filelist.txt and val_filelist.txt -- these are randomly generated at a 90% training, 10% validation distribution.
-
-The training colab notebook is here: https://colab.research.google.com/github/justinjohn0306/TalkNET-colab/blob/main/TalkNet_Training.ipynb
-
-Upload these files to your Google Drive along with the zip, adjust the paths as necessary in the Colab and you're done!
-
 ### Good Luck!
 
 And thanks to all the hard working Ponies who took the time to document this. The compendium of knowledge created by the Pony Preservation Project was instrumental in giving these tools shape and form.
