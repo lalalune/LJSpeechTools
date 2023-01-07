@@ -1,4 +1,4 @@
-# Webaverse Speech Tools
+# LJ Speech Tools
 Tools for creating voices for Webaverse.
 
 ## What do I need to make a dataset?
