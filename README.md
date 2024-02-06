@@ -22,11 +22,13 @@ pip install -r requirements.txt
 2. Run the python script:
 
 Commandline parameters are:<br>
-    --provider'     '-p     Set transcription provider (google or whisper) default is whisper<br>
-    --speech_key'   '-k     Google Speech API Key<br>
-    --model'        '-m     whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3<br>
-    '--help'        '-h'    show help<br>
+```bash
 
+    --provider      (-p)     Set transcription provider (google or whisper) default is whisper
+    --speech_key    (-k)     Google Speech API Key
+    --model         (-m)     whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3
+    --help          (-h)     show help
+```
 ```sh
 python pipeline.py
 ```
