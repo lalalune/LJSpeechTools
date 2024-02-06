@@ -23,10 +23,13 @@ def copy_wavs():
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        prog='LJ Speech Toolset',
+        description='chops up wav files and adds transcription, outputs in LJ Speech format')
     parser = argparse.ArgumentParser()
-    parser.add_argument('--provider',  action='store', help='Set transcription provider (google or whisper) default is whisper', default="whisper")
-    parser.add_argument('--speech_key',  action='store', help='Google Speech API Key')
-    parser.add_argument('--model',  action='store', help='Open AI Whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3')
+    parser.add_argument('-p', '--provider',  help='Set transcription provider (google or whisper) default is whisper', default="whisper")
+    parser.add_argument('-k', '--speech_key',  help='Google Speech API Key')
+    parser.add_argument('-m', '--model',   help='Open AI Whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3', default="large-v3")
 #    parser.add_argument('--help',  action='store_true', help='show help')
     args = parser.parse_args()
 
