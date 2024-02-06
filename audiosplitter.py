@@ -31,7 +31,7 @@ def split_long_audios():
         os.makedirs('./wavs_split_temp')
     if not os.path.exists('./wavs_split_final'):
         os.makedirs('./wavs_split_final')
-    for wav in glob.glob('./wavs/*.wav'):
+    for wav in glob.glob('./put_audio_files_here/*.wav'):
         # get the filename without the extension
         filename = os.path.splitext(os.path.basename(wav))[0]
         # get the length of the audio
