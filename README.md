@@ -21,6 +21,11 @@ pip install -r requirements.txt
 
 2. Run the python script:
 
+Open AI Whisper model will automatically download the first time used.  The larger the model the more time it takes to download.  The smaller the model the faster the inference.<BR>
+
+More information can be found here: https://github.com/openai/whisper 
+You will need to install ffmpeg for Whisper to work.  See instructions on Whisper page.
+
 Commandline parameters are:<br>
 ```bash
 
