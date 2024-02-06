@@ -43,11 +43,11 @@ def main():
 
 
     clear_wavs();
-    #copy_wavs();
+    copy_wavs();
 
     # 1. split audio files with audiosplitter
 
-    #split_all_audios();
+#    split_all_audios();
     split_long_audios();
     filter_short_audios();
 

@@ -13,10 +13,10 @@ def split_audio(audio_path, output_path, min_silence_len=1500, silence_thresh=-6
         print("exporting", out_file)
         chunk.export(out_file, format="wav")
 
-# for each wav in ./data, split it into chunks and save them to ./wavs
+# for each wav in ./put_audio_files_here, split it into chunks and save them to ./wavs
 # i.e. './data/juice1.wav' gets split into './wavs/juice1_chunk{0}.wav'
 def split_all_audios():
-    for wav in glob.glob('./data/*.wav'):
+    for wav in glob.glob('./put_audio_files_here/*.wav'):
         # get the filename without the extension
         filename = os.path.splitext(os.path.basename(wav))[0]
         # create the output path
