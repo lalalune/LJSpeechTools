@@ -28,8 +28,13 @@ def main():
         description='chops up wav files and adds transcription, outputs in LJ Speech format')
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--provider',  help='Set transcription provider (google or whisper) default is whisper', default="whisper")
-    parser.add_argument('-k', '--speech_key',  help='Google Speech API Key')
+    parser.add_argument('-a', '--speech_key',  help='Google Speech API Key')
     parser.add_argument('-m', '--model',   help='Open AI Whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3', default="large-v3")
+    parser.add_argument('-s', '--seconds',  help='Set the number seconds per wav file.', default=12)
+    parser.add_argument('-l', '--min_silence_len',  help='Set the min_silence_len for audio segmenting', default=300)
+    parser.add_argument('-t', '--silence_thresh',  help='Set silence_thresh for audio segmenting', default=-60)
+    parser.add_argument('-k', '--keep_silence',  help='Set keep_silence for audio segmenting', default=300)
+
     args = parser.parse_args()
 
     if args.provider == "google" and args.speech_key == None:
@@ -48,7 +53,7 @@ def main():
 #    split_all_audios();
 
     # simply split and move the clips
-    split_long_audios();
+    split_long_audios(min_silence_len = args.min_silence_len ,silence_thresh = args.silence_thresh, keep_silence=args.keep_silence, seconds = args.seconds);
     filter_short_audios();
 
     # 2. transcribe audio files with transcriber

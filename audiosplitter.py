@@ -25,7 +25,7 @@ def split_all_audios():
         split_audio(wav, output_path)
 
 # iterate through files in wavs, for each file get the length. if it's more than 12 seconds, split it into 12 second chunks at the first silence over 200ms
-def split_long_audios():
+def split_long_audios(min_silence_len = 300,silence_thresh = -60, keep_silence=300, seconds = 12):
     # if wavs_split_temp and wavs_split_final don't exist, create them
     if not os.path.exists('./wavs_split_temp'):
         os.makedirs('./wavs_split_temp')
@@ -37,10 +37,10 @@ def split_long_audios():
         # get the length of the audio
         audio = AudioSegment.from_wav(wav)
         length = round(audio.duration_seconds, 2)
-        # if the length is more than 12 seconds, split it into 12 second chunks
-        if length > 12:
+        # if the length is more than seconds, split it into second chunks
+        if length > seconds:
 
-            chunks = split_on_silence(audio, min_silence_len=300, silence_thresh=-60, keep_silence=300)
+            chunks = split_on_silence(audio, min_silence_len=min_silence_len, silence_thresh=silence_thresh, keep_silence=keep_silence)
             current_length = 0
             current_split = 0
             # out_data is an empty AudioSegment
@@ -50,7 +50,7 @@ def split_long_audios():
                 # also write if we're at the end of the file
                 current_length += round(chunk.duration_seconds, 2)
                 print(filename)
-                if current_length > 12 or (i == len(chunks) - 1 and len(chunks) > 1):
+                if current_length > seconds or (i == len(chunks) - 1 and len(chunks) > 1):
                     # export the chunk
                     out_file = './wavs_split_temp/' + filename + '_split' + str(current_split) + '.wav'
                     print("exporting", out_file)
@@ -90,7 +90,7 @@ def filter_short_audios():
             print('omitting', wav)
 
 if __name__ == "__main__":
-    split_all_audios();
-    split_long_audios();
+#    split_all_audios();
+    split_long_audios(min_silence_len = 300 ,silence_thresh = -60, keep_silence=300, seconds = 12);
     filter_short_audios();
     print('Final audio files are in ./wavs_split_final')
