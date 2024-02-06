@@ -31,6 +31,7 @@ def transcribe(provider = "google", google_speech_api_key = None, model_name="la
             print()
             transcription = ''
             try:
+                print(f"Transcribing : {fpath}")
                 if provider == "google":
                     with sr.AudioFile(fpath) as source:
                         audio = r.record(source.filename_or_fileobject)  # read the entire audio file
@@ -38,7 +39,7 @@ def transcribe(provider = "google", google_speech_api_key = None, model_name="la
                 elif provider == "whisper":
                     transcription = whisper_transcriber.transcribe(audio_file_name=fpath)
 
-                print(fpath + "|" + transcription)
+                print("     " + transcription)
                 metadata.append(fpath + "|" + transcription)
             except Exception as error:
                 print('Skipping ' + fpath + ' : An Error occurred : '+ error)
