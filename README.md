@@ -7,7 +7,7 @@ Tools for creating voices for Webaverse.
 Mono 22khz WAV is ideal but the system will try to convert other formats.
 
 # Installation
-You will need Python 3 installed on your system.
+You will need Python 3.8 installed on your system.
 
 To install:
 
@@ -20,6 +20,13 @@ pip install -r requirements.txt
 1. Put your files in the `put_audio_files_here` folder
 
 2. Run the python script:
+
+Commandline parameters are
+    --provider'     '-p     Set transcription provider (google or whisper) default is whisper
+    --speech_key'   '-k     Google Speech API Key
+    --model'        '-m     whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3
+    '--help'        '-h'    show help
+
 ```sh
 python pipeline.py
 ```
@@ -103,7 +110,9 @@ python audiosplitter.py
 ```
 Verify that the data is good, then delete the contents of the wavs folder and move the data_outputs there
 
-3. Transcribe your dataset
+3. Transcribe your dataset, if you want to use whisper, it will download the whisper_tts large-v3 model.  
+If you wish to use another model modify the python file.
+If you want to use google speech api you will need to modify the pythong file and set a key or use the pipeline
 ```bash
 bash transcribe.sh
 # or

@@ -80,11 +80,10 @@ def filter_short_audios():
         # get the length of the audio
         audio = AudioSegment.from_wav(wav)
         length = round(audio.duration_seconds, 2)
-        # if the length is more than 12 seconds, split it into 12 second chunks
         print("length is", length)
         if length > 1:
             # copy to wavs_split_final
-            out_file = './wavs_split_final/' + filename + '.wav'
+            out_file = './wavs/' + filename + '.wav'
             # export the chunk
             audio.export(out_file, format="wav")
         else:

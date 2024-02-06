@@ -2,6 +2,7 @@ import os
 import glob
 import shutil
 from audiosplitter import split_all_audios, split_long_audios, filter_short_audios
+import argparse
 
 # clear out the wavs folder using python
 
@@ -18,43 +19,62 @@ def copy_wavs():
     for wav in glob.glob('./put_audio_files_here/*.wav'):
         shutil.copy(wav, './wavs/')
 
-clear_wavs();
-copy_wavs();
 
-# 1. split audio files with audiosplitter
 
-split_all_audios();
-split_long_audios();
-filter_short_audios();
 
-# 2. transcribe audio files with transcriber
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--provider', '-p', action='store', help='Set transcription provider (google or whisper) default is whisper', default="whisper")
+    parser.add_argument('--speech_key', '-k', action='store', help='Google Speech API Key')
+    parser.add_argument('--model', '-m', action='store', help='Open AI Whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3')
+    parser.add_argument('--help', '-h', action='store_true', help='show help')
+    args = parser.parse_args()
 
-from transcriber import transcribe
+    if args.provider == "google" and args.speech_key == None:
+        print("Error: you must provide a google speech api key to use google transcriber")
+        return
 
-transcribe();
 
-# 3. swearing
+    clear_wavs();
+    #copy_wavs();
 
-from swearing import replace_censored_words
+    # 1. split audio files with audiosplitter
 
-replace_censored_words();
+    #split_all_audios();
+    split_long_audios();
+    filter_short_audios();
 
-print('replace_censored_words')
+    # 2. transcribe audio files with transcriber
 
-# 4. prepare dataset
+    from transcriber import transcribe
 
-from make_dataset import make_dataset
+    transcribe(provider=args.provider, google_speech_api_key=args.speech_key, model_name=args.model);
 
-make_dataset();
+    # 3. swearing
 
-print('ok')
+    from swearing import replace_censored_words
 
-# delete wavs_split_temp
+    replace_censored_words();
 
-shutil.rmtree('wavs_split_temp')
+    print('replace_censored_words')
 
-# delete wavs_split_final
-shutil.rmtree('wavs_split_final')
+    # 4. prepare dataset
 
-# delete wavs
-clear_wavs();
+    from make_dataset import make_dataset
+
+    make_dataset();
+
+    print('ok')
+
+    # delete wavs_split_temp
+    shutil.rmtree('wavs_split_temp')
+
+    # delete wavs_split_final
+    shutil.rmtree('wavs_split_final')
+
+    # delete wavs
+    clear_wavs();
+
+
+if __name__ == "__main__":
+    main()
