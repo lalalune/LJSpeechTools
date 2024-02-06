@@ -46,7 +46,7 @@ def transcribe(provider = "google", google_speech_api_key = None, model_name="la
                 metadata.append(fpath + "|" + "<ERROR>")
                 new_fpath = './ignore/' + path.basename(fpath)
                 # now move the file to the skipped directory
- # RMOVE THIS COMMENT               rename(fpath, new_fpath)
+                rename(fpath, new_fpath)
                 continue
 
     metadata_txt = '\n'.join(metadata)
@@ -58,6 +58,7 @@ def transcribe(provider = "google", google_speech_api_key = None, model_name="la
 if __name__ == "__main__":
     # Use open ai whisper with large-v3 model, slow but best result
     transcribe(provider="whisper")
+
     # Use open ai whisper with large-v3 model, slow but best result
     # valid responses : tiny, base, small, medium, large, large-v2, or large-v3
 #    transcribe(provider="whisper", model_name = "tiny")

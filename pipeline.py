@@ -30,24 +30,24 @@ def main():
     parser.add_argument('-p', '--provider',  help='Set transcription provider (google or whisper) default is whisper', default="whisper")
     parser.add_argument('-k', '--speech_key',  help='Google Speech API Key')
     parser.add_argument('-m', '--model',   help='Open AI Whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3', default="large-v3")
-#    parser.add_argument('--help',  action='store_true', help='show help')
     args = parser.parse_args()
 
     if args.provider == "google" and args.speech_key == None:
         print("Error: you must provide a google speech api key to use google transcriber")
         return
 
- #   if args.help:
-#        parser.print_help()
-#        return
 
 
     clear_wavs();
-    copy_wavs();
+    #not required, leaving for historical purposes.  Original author can remove
+#    copy_wavs();
 
     # 1. split audio files with audiosplitter
 
+    # not required, leaving for historical purposes.  Original author can remove
 #    split_all_audios();
+
+    # simply split and move the clips
     split_long_audios();
     filter_short_audios();
 
