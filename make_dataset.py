@@ -27,7 +27,7 @@ def make_dataset():
                 f.write(line + '\n')
 
     # zip all the wavs in the wavs folder into a zip file and save as dataset.zip
-    os.system('zip -r dataset.zip wavs trainfiles.txt valfiles.txt')
+    os.system('zip -r dataset.zip wavs metadata.csv trainfiles.txt valfiles.txt')
 
 if __name__ == "__main__":
     make_dataset()
