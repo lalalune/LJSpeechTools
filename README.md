@@ -24,10 +24,10 @@ pip install -r requirements.txt
 Commandline parameters are:<br>
 ```bash
 
-    --provider      (-p)     Set transcription provider (google or whisper) default is whisper
-    --speech_key    (-k)     Google Speech API Key
-    --model         (-m)     whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3
-    --help          (-h)     show help
+    --provider      Set transcription provider (google or whisper) default is whisper
+    --speech_key    Google Speech API Key
+    --model         Whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3
+    --help          Show help
 ```
 ```sh
 python pipeline.py

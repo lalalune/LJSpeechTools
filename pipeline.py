@@ -24,14 +24,18 @@ def copy_wavs():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--provider', '-p', action='store', help='Set transcription provider (google or whisper) default is whisper', default="whisper")
-    parser.add_argument('--speech_key', '-k', action='store', help='Google Speech API Key')
-    parser.add_argument('--model', '-m', action='store', help='Open AI Whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3')
-    parser.add_argument('--help', '-h', action='store_true', help='show help')
+    parser.add_argument('--provider',  action='store', help='Set transcription provider (google or whisper) default is whisper', default="whisper")
+    parser.add_argument('--speech_key',  action='store', help='Google Speech API Key')
+    parser.add_argument('--model',  action='store', help='Open AI Whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3')
+    parser.add_argument('--help',  action='store_true', help='show help')
     args = parser.parse_args()
 
     if args.provider == "google" and args.speech_key == None:
         print("Error: you must provide a google speech api key to use google transcriber")
+        return
+
+    if args.help:
+        parser.print_help()
         return
 
 
