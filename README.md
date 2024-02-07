@@ -7,7 +7,7 @@ Tools for creating voices for Webaverse.
 Mono 22khz WAV is ideal but the system will try to convert other formats.
 
 # Installation
-You will need Python 3 installed on your system.
+You will need Python 3.8 installed on your system.
 
 To install:
 
@@ -20,6 +20,20 @@ pip install -r requirements.txt
 1. Put your files in the `put_audio_files_here` folder
 
 2. Run the python script:
+
+Open AI Whisper model will automatically download the first time used.  The larger the model the more time it takes to download.  The smaller the model the faster the inference.<BR>
+
+More information can be found here: https://github.com/openai/whisper 
+You will need to install ffmpeg for Whisper to work.  See instructions on Whisper page.
+
+Commandline parameters are:<br>
+```bash
+
+    --provider      Set transcription provider (google or whisper) default is whisper
+    --speech_key    Google Speech API Key
+    --model         Whisper model (tiny, base, small, medium, large, large-v2, or large-v3) to use, default large-v3
+    --help          Show help
+```
 ```sh
 python pipeline.py
 ```
@@ -56,7 +70,8 @@ python separator.py --threshold=0.65
 
 ## Audio Transcription
 
-To transcribe audio files in the wavs folder
+To transcribe audio files in the wavs folder.  Edit transciber.py to modify settings for whisper or to use googl speech api.
+
 ```bash
 bash transcribe.sh
 # or
@@ -98,12 +113,16 @@ Assuming you wanted to record your own voice and didn't need to deal with speake
 If they are not wavs, convert them using ffmpeg - the default we are targeting is Mono WAV 22050 Hz
 
 2. If your files are longer than 12 seconds and not hand-split, run the audiosplitter
+3. 
 ```bash
 python audiosplitter.py
 ```
 Verify that the data is good, then delete the contents of the wavs folder and move the data_outputs there
 
-3. Transcribe your dataset
+3. Transcribe your dataset, if you want to use whisper, it will download the whisper_tts large-v3 model.  
+If you wish to use another model modify the python file.
+If you want to use google speech api you will need to modify the pythong file and set a key or use the pipeline
+4. 
 ```bash
 bash transcribe.sh
 # or
@@ -113,4 +132,4 @@ This will create a metadata.csv, which is the standard format of LJSpeech -- for
 
 ### Good Luck!
 
-And thanks to all the hard working Ponies who took the time to document this. The compendium of knowledge created by the Pony Preservation Project was instrumental in giving these tools shape and form.
+And thanks to all the hardworking Ponies who took the time to document this. The compendium of knowledge created by the Pony Preservation Project was instrumental in giving these tools shape and form.

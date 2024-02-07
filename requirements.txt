@@ -2,3 +2,4 @@ numpy==1.20.3
 pydub==0.25.1
 Resemblyzer==0.1.1.dev0
 SpeechRecognition==3.8.1
+openai-whisper==20231117
