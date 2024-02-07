@@ -34,6 +34,7 @@ def main():
     parser.add_argument('-l', '--min_silence_len',  help='Set the min_silence_len for audio segmenting', default=300)
     parser.add_argument('-t', '--silence_thresh',  help='Set silence_thresh for audio segmenting', default=-60)
     parser.add_argument('-k', '--keep_silence',  help='Set keep_silence for audio segmenting', default=300)
+    parser.add_argument('-n', '--no_split',  action="store_true", help='Do not split the metadata.csv into training and test sets', default=300)
 
     args = parser.parse_args()
 
@@ -74,7 +75,7 @@ def main():
 
     from make_dataset import make_dataset
 
-    make_dataset();
+    make_dataset(args.no_split);
 
     print('ok')
 

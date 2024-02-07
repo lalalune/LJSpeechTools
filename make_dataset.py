@@ -4,7 +4,7 @@ import csv
 import random
 import os
 
-def make_dataset():
+def make_dataset(no_split = False):
     # read in the metadata.csv file
     with open('metadata.csv', 'r') as f:
         reader = csv.reader(f)
@@ -27,7 +27,10 @@ def make_dataset():
                 f.write(line + '\n')
 
     # zip all the wavs in the wavs folder into a zip file and save as dataset.zip
-    os.system('zip -r dataset.zip wavs metadata.csv trainfiles.txt valfiles.txt')
+    if no_split:
+        os.system('zip -r dataset.zip wavs metadata.csv')
+    else:
+        os.system('zip -r dataset.zip wavs  trainfiles.txt valfiles.txt')
 
 if __name__ == "__main__":
     make_dataset()
